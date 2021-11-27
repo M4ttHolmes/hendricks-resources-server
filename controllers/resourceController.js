@@ -4,7 +4,7 @@ let validateJWT = require("../middleware/validate-jwt");
 const { ResourceModel } = require("../models")
 
 //! Create new Resource
-router.post('/create', validateJWT, async (req, res) => {
+router.post('/create', async (req, res) => {
     const {name, checkedOut, owner, location} = req.body.resource;
     const resourceEntry = {
         name,
