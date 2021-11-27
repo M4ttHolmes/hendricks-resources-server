@@ -51,6 +51,33 @@ router.delete("/delete/:id", validateJWT, async (req, res) => {
 });
 
 
+//! Edit Resource by ID
+router.put("/update/:id", async(req, res) => {
+    const {name, checkedOut, owner, location} = req.body.resource;
+    const resourceId = req.params.id;
+
+    const query = {
+        where: {
+            id: resourceId,
+        }
+    };
+
+    const updatedResource = {
+        name: name,
+        checkedOut: checkedOut,
+        owner: owner,
+        location: location
+    };
+
+    try {
+        const update = await ResourceModel.update(updatedResource, query);
+        res.status(200).json(update);
+    } catch (err) {
+        res.status(500).json({error: err});
+    }
+});
+
+
 
 
 module.exports = router;
