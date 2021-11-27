@@ -23,7 +23,32 @@ router.post('/create', validateJWT, async (req, res) => {
     }
 });
 
+//! Get All Resources
+router.get("/", async (req, res) => {
+    try {
+        const resources = await ResourceModel.findAll();
+        res.status(200).json(resources);
+    } catch (err) {
+        res.status(500).json({ error: err });
+    }
+});
 
+//! Delete Resource by ID
+router.delete("/delete/:id", validateJWT, async (req, res) => {
+    const resourceId = req.params.id;
+
+    try {
+        const query = {
+            where: {
+                id: resourceId,
+            }
+        };
+        await ResourceModel.destroy(query);
+        res.status(200).json({ message: "Resource Deleted."});
+    } catch (err) {
+        res.status(500).json({ error: err });
+    }
+});
 
 
 
