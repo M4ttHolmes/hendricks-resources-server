@@ -6,7 +6,7 @@ const Resource = db.define("resource", {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    status: {
+    checkedOut: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
     },
@@ -16,7 +16,7 @@ const Resource = db.define("resource", {
     },
     location: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
     },
 });
 
